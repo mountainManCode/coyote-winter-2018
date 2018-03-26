@@ -1,30 +1,29 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { textStyles, colors } from '../../config/styles';
-import { buttonStyle } from '../../config/buttonStyle';
 
-const { H2, H4, BODY } = textStyles;
-const { GREY, MAIN_LIGHT, OFF_WHITE, night } = colors;
-const { B_MAIN } = buttonStyle;
+const { width } = Dimensions.get('window');
+const { H2, H4, BODY, SMALL } = textStyles;
 
 export const styles = StyleSheet.create({
   profileContainer: {
-    padding: 10,
+    padding: 8,
     borderTopWidth: 2,
     borderRightWidth: 2,
     borderBottomWidth: 4,
     borderLeftWidth: 4,
-    borderColor: GREY,
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: 'lightgrey'
   },
   editContainer: {
     alignItems: 'flex-end'
   },
   editProfile: {
-    fontSize: H4.fontSize,
-    color: MAIN_LIGHT
+    fontSize: SMALL.fontSize,
+    fontFamily: SMALL.fontFamily,
+    color: colors.MAIN_LIGHT
   },
   userWrapper: {
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   profileImage: {
     borderRadius: 75,
@@ -32,51 +31,83 @@ export const styles = StyleSheet.create({
     width: 150,
     marginBottom: 15,
     marginRight: 5,
-    flex: 1
-  },
-  userInfo: {
-    marginLeft: 5,
     flex: 1,
     alignSelf: 'center'
   },
+  userInfo: {
+    marginLeft: 5,
+    flex: 1
+  },
   imageContainer: {
-    flexDirection: 'column',
-    marginTop: 10
+    margin: 5
   },
   changeImage: {
-    color: night,
-    backgroundColor: GREY,
+    color: colors.night,
+    backgroundColor: colors.GREY,
     position: 'absolute',
     alignSelf: 'center',
     top: 75,
     paddingHorizontal: 15,
     paddingVertical: 2
   },
-  userName: {
-    fontSize: H2.fontSize,
+  userNameContainer: {
+    flexDirection: 'row',
     justifyContent: 'center'
   },
-  textH4: {
+  userName: {
+    fontSize: H2.fontSize,
+    fontFamily: H2.fontFamily,
+    paddingHorizontal: 4
+  },
+  location: {
     fontSize: H4.fontSize,
-    paddingVertical: 5
-  },
-  descriptionContainer: {
-    paddingVertical: 5
-  },
-  description: {
-    fontSize: BODY.fontSize,
-    paddingVertical: 5
-  },
-  saveButton: {
-    backgroundColor: B_MAIN.backgroundColor,
-    borderRadius: B_MAIN.borderRadius,
-    paddingHorizontal: 30,
+    fontFamily: H4.fontFamily,
     paddingVertical: 5,
     alignSelf: 'center'
   },
-  buttonText: {
-    color: OFF_WHITE,
+  profileButtonContainer: {
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  descriptionContainer: {
+    marginTop: 5,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.night,
+    minHeight: width / 3
+  },
+  subTitle: {
+    fontSize: H4.fontSize,
+    fontFamily: H4.fontFamily
+  },
+  description: {
     fontSize: BODY.fontSize,
+    fontFamily: BODY.fontFamily,
+    paddingVertical: 5
+  },
+  saveButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    backgroundColor: colors.MAIN,
+    borderRadius: 25,
+    minWidth: 120,
+    maxWidth: 150,
+    minHeight: 30,
+    marginVertical: 15,
+    paddingHorizontal: 10
+  },
+  buttonText: {
+    color: colors.WHITE,
+    fontSize: BODY.fontSize,
+    fontFamily: BODY.fontFamily,
     textAlign: 'center'
   }
 });

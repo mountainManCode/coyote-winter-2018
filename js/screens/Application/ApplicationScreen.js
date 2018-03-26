@@ -17,9 +17,7 @@ class ApplicationScreen extends Component {
     // TODO: get uid from authenticated object in redux
     const uid = 'QhP2yK3dx4P8BAB3AHJiLPAZgn93';
 
-    const listingIds = await getApplicationsByUser(
-      uid
-    );
+    const listingIds = await getApplicationsByUser(uid);
 
     dispatch(updateApplicationState(listingIds));
     dispatch(updateLoadingState(false));
@@ -48,6 +46,4 @@ ApplicationScreen.propTypes = {
   navigation: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(
-  ApplicationScreen
-);
+export default connect(mapStateToProps)(ApplicationScreen);

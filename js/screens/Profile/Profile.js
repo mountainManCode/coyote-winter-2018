@@ -1,31 +1,26 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import ProfileHeaderContainer from '../../components/ProfileHeader/ProfileHeaderContainer';
 import { styles } from './styles';
 
-const Profile = ({ navigation, signOut, userData }) => {
+const Profile = ({ navigation, userData, userAuth }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.profileTab}>
-        <Text style={styles.profileText}>Profile</Text>
-        <Button
-          title="My Applications"
-          onPress={() => navigation.navigate('Application')}
-          style={styles.profileText}
-        />
-      </View>
-      <ProfileHeaderContainer userData={{ userData }} />;
-      <View>
-        <Button onPress={signOut} title="sign me out" />
-      </View>
+      <ProfileHeaderContainer
+        userData={{ userData }}
+        navigation={navigation}
+        userAuth={{ userAuth }}
+      />;
     </View>
   );
 };
 
 Profile.propTypes = {
-  navigation: PropTypes.object,
-  signOut: PropTypes.func
+  navigation: PropTypes.object.isRequired,
+  signOut: PropTypes.func,
+  userData: PropTypes.object,
+  userAuth: PropTypes.string
 };
 
 export default Profile;

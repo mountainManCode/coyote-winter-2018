@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { fetchUser } from '../../redux/modules/user';
-import { colors } from '../../config/styles';
 import Profile from './Profile';
+import Loader from '../../components/Loader/Loader';
 
 class ProfileScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerLeft: (
-      <Button
-        onPress={() => navigation.navigate('Listing')}
-        title="Info"
-        color={colors.MAIN}
-      />
-    )
-  });
-
-  componentDidMount() {
-    const userId = 'QhP2yK3dx4P8BAB3AHJiLPAZgn93';
-    this.props.dispatch(fetchUser(userId));
-  }
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
+  static navigationOptions = () => {
+    return {
+      title: 'Profile',
+      tabBarLabel: 'Profile'
+    };
   };
 
+  async componentDidMount() {
+    const { userAuth } = this.props;
+
+    await this.props.dispatch(fetchUser(userAuth));
+  }
+
   render() {
-    return (
+    const { navigation, userData, userAuth, isLoading } = this.props;
+    return isLoading ? (
+      <Loader />
+    ) : (
       <Profile
-        navigation={this.props.navigation}
-        signOut={this._signOutAsync}
-        userData={this.props.userData}
+        navigation={navigation}
+        userData={userData}
+        userAuth={userAuth}
       />
     );
   }
@@ -42,13 +37,15 @@ class ProfileScreen extends Component {
 const mapStateToProps = state => ({
   isLoading: state.user.isLoading,
   userData: state.user.userData,
-  userAuth: state.auth.updateAuthState
+  userAuth: state.auth.authenticated
 });
 
 ProfileScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  userData: PropTypes.object.isRequired
+  userData: PropTypes.object.isRequired,
+  userAuth: PropTypes.string,
+  isLoading: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(ProfileScreen);
